@@ -1,0 +1,19 @@
+#!/usr/bin/python
+
+import smtplib
+import email
+
+
+letter = "Hello!" + '\n' + "How are you doing today?"
+
+def mailsend (toaddress,fromaddress,subject,message):
+    header = 'To:' + toaddress + '\n' + 'From:' + fromaddress + '\n' + 'Subject: ' + subject +'\n'
+    msg = header + '\n' + message
+    #email server login information (specifically gmail) others servers have different ports
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login("yourusername", "yourpassword")
+    server.sendmail("fromaddress", "toaddress", msg)
+    server.quit()
+    
+mailsend("rossirhone@comcast.net","rhonerross@gmail.com", "test", letter)
